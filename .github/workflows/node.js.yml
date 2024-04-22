@@ -10,11 +10,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20.12.0'  # Specify the version of Node.js to install
          
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
@@ -40,7 +35,9 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-           cd  ${{ secrets.TARGET_DIR }}
-           nvm use 20
-           npm i
-           node index.js
+             cd ${{ secrets.TARGET_DIR }}
+             export NVM_DIR="$HOME/.nvm"
+             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+             nvm use 20
+             npm install pm2 -g  # Install pm2 globally if not already installed
+             pm2 start index.js
