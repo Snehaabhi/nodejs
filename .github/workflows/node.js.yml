@@ -45,6 +45,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /var/www/html
-            sudo rm -rf *
-            sudo mv /home/ubuntu/work/* .
+           cd  nodework
+           pm2 start index.json
