@@ -15,11 +15,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '20.12.0'  # Specify the version of Node.js to install
-
-      - name: Install dependencies and run npm command
-        working-directory: apis-nodejs
-        run: |
-          npm i  
          
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
@@ -46,4 +41,6 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
            cd  nodework
+           npm i
+           npm install pm2 -g
            node index.js
