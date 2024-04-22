@@ -28,7 +28,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/ubuntu/work
+            cd /home/ubuntu/nodework
             sudo rm -rf *
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
