@@ -42,5 +42,4 @@ jobs:
           script: |
            cd  nodework
            npm i
-           npm install pm2 -g
            node index.js
